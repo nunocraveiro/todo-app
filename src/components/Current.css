@@ -1,0 +1,53 @@
+.current {
+    display: flex;
+    flex-direction: column;
+    color: rgb(255, 245, 215);
+    font-family: 'PPCharlevoix';
+    font-weight: 800;
+    font-size: 1rem;
+    width: 40rem;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 6rem;
+    border-top: 1px solid rgb(185, 179, 159);
+    border-bottom: 1px solid rgb(185, 179, 159);
+}
+
+.title {
+    font-family: 'NeueMachinaPlain';
+    font-size: 3.5rem;
+    padding-top: 0.5rem;
+}
+
+.num-completed {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: rgb(185, 179, 159);
+}
+
+.search {
+    height: 1.7rem;
+    color: white;
+    background-color: black;
+    outline: none;
+    border: none;
+    /* border: 1px solid white; */
+    font-family: 'PPCharlevoix';
+    font-weight: 800;
+    font-size: 1rem;
+    color: rgb(185, 179, 159);
+    width: 11rem;
+    margin-right: 2rem;
+    border-bottom: 1px solid rgb(185, 179, 159);
+}
+
+.todo-list {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    height: 17rem;
+}

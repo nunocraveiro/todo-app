@@ -1,0 +1,61 @@
+.time-selector {
+    color: rgb(255, 245, 215);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 1px solid rgb(185, 179, 159);
+    border-right: 1px solid rgb(185, 179, 159);
+    margin-left: 3.5rem;
+    margin-right: 3rem;
+    width: fit-content;
+    font-family: 'NeueMachinaPlain';
+    font-size: 3rem;
+    font-weight: 800;
+    user-select: none;
+}
+
+
+.day {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    font-size: 1.7rem;
+    height: 6rem;
+}
+
+.month {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 1.7rem;
+    text-align: center;
+    align-items: center;
+    height: 10rem;
+}
+
+.month :first-child {
+    margin-bottom: 0.5rem;
+}
+
+.month p {
+    transform: rotate(0.25turn);
+    letter-spacing: 0.5rem;
+    padding-top: 0.3rem;
+}
+
+.year-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 2.2rem;
+    height: 14rem;
+}
+
+.arrow {
+    cursor: pointer;
+}

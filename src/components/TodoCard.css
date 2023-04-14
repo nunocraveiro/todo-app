@@ -1,0 +1,55 @@
+.item {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  height: 9em;
+  border-radius: 10px;
+  margin-bottom: 1em;
+  position: relative;
+}
+
+.item:hover {
+  cursor: pointer;
+}
+
+.todo--notcompleted {
+  background-color: lightblue;
+}
+
+.todo--completed {
+  background-color: lightgray;
+  color: rgb(95, 95, 95);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+/* .title {
+  display: flex;
+  padding-left: 0.8em;
+  align-items: flex-end;
+  user-select: none;
+} */
+
+.description {
+  display: flex;
+  padding-left: 1.2em;
+  padding-top: 1em;
+  align-items: flex-start;
+  user-select: none;
+}
+
+.todo__button--remove {
+  position: absolute;
+  padding-top: 0.4em;
+  padding-bottom: 0.6em;
+  right: 1.3em;
+  top: 1.2em;
+  height: 2.2em;
+  width: 4.5em;
+  cursor: pointer;
+  border: 0;
+  border-radius: 5px;
+}
+
+.todo__button--remove:hover {
+  background-color: coral;
+}

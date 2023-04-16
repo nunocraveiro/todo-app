@@ -2,6 +2,7 @@
     color: rgb(255, 245, 215);
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     /* border: 1px solid white; */
     width: 21rem;
 }
@@ -22,11 +23,9 @@
     font-size: 2.5rem;
     font-weight: 800;
     width: 17rem;
-    height: 21rem;
+    height: 17rem;
     text-transform: uppercase;
-    margin-bottom: 3rem;
-    margin-left: auto;
-    
+    align-self: flex-end;
 }
 
 .new-title::placeholder {
@@ -38,4 +37,19 @@
     font-weight: 800;
     font-size: 1.2rem;
     height: 10rem;
+}
+
+.add-btn {
+    background-color: black;
+    border: none;
+    color: rgb(255, 245, 215);
+    font-family: 'NeueMachinaPlain';
+    font-size: 2.5rem;
+    font-weight: 800;
+    border: 1px solid rgb(185, 179, 159);
+    border-radius: 50%;
+    width: 3.5rem;
+    height: 3.5rem;
+    text-align: center;
+    cursor: pointer;
 }

@@ -1,6 +1,5 @@
 import './App.css';
-import React, { useState, useRef, useEffect } from 'react';
-import TodoList from './components/TodoList.js';
+import { useState, useEffect } from 'react';
 import Current from './components/Current';
 import TimeSelector from './components/TimeSelector';
 import Adder from './components/Adder';
@@ -8,43 +7,22 @@ import Adder from './components/Adder';
 window.onbeforeunload = () => localStorage.clear();
 
 const App = () => {
-  const [todos, setTodos] = useState(localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : []);
-  const titleRef = useRef(null);
-  const descriptionRef = useRef(null);
+  // const [todos, setTodos] = useState(localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : {notCompleted: [], completed: []});
+  // const [todos, setTodos] = useState(localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : {notCompleted: [{id: 0, title: 'go to ada and get bounties', description: '', completed: false}, {id: 1, title: 'do flawless lake of shadows', description: '', completed: false}, {id: 2, title: 'finish thunderlord catalyst', description: '', completed: false}], completed: []});
+  const [todos, setTodos] = useState(localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : [{id: 0, title: 'go to ada and get bounties', description: '', completed: false, added: false}, {id: 1, title: 'do flawless lake of shadows', description: '', completed: false, added: false}, {id: 2, title: 'finish thunderlord catalyst', description: '', completed: false, added: false}]);
+  const [completedTodos, setCompletedTodos] = useState(localStorage.getItem('completedTodos') ? JSON.parse(localStorage.getItem('completedTodos')) : []);
+  const date = new Date();
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
-
-  const handleAddTodo = e => {
-    e.preventDefault();
-    const newTodo = {
-      id: todos.length === 0 ? 0 : todos[todos.length-1].id+1,
-      title: titleRef.current.value,
-      description: descriptionRef.current.value,
-      completed: false
-    };
-    setTodos(prevTodos => [...prevTodos, newTodo]);
-    titleRef.current.value = '';
-    descriptionRef.current.value = '';
-  };
+    localStorage.setItem('completedTodos', JSON.stringify(completedTodos));
+  }, [todos, completedTodos]);
 
   return (
     <div className="App">
-      <Current todos={todos} setTodos={setTodos}/>
-      <TimeSelector/>
-      <Adder/>
-      {/* <section>
-        <h2 className="app-name">Register New ToDo</h2>
-        <form>
-          <p>Title</p>
-          <input className='titleInput' type="text" id="txtTodoItemToAdd" ref={titleRef} />
-          <p>Description</p>
-          <input className='descriptionInput' type="text" data-testid="txtTodoItemDescription" ref={descriptionRef} />
-          <button className='add' id="btnAddTodo" onClick={handleAddTodo}>Add</button>
-        </form>
-      </section>
-      <TodoList todos={todos} setTodos={setTodos}/> */}
+      <Current date={date} todos={todos} setTodos={setTodos} completedTodos={completedTodos} setCompletedTodos={setCompletedTodos}/>
+      <TimeSelector date={date}/>
+      <Adder todos={todos} setTodos={setTodos}/>
     </div>
   );
 };

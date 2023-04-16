@@ -1,27 +1,25 @@
 import './TimeSelector.css';
+import { addLeftZero, convertMonth, getYearArray } from '../helper-functions';
 
-const TimeSelector = () => {
+const TimeSelector = ({date}) => {
     return (
         <div className='time-selector'>
             <div className='day'>
-                <span class="material-symbols-outlined arrow">keyboard_arrow_up</span>
-                <p>16</p>
-                <span class="material-symbols-outlined arrow">keyboard_arrow_down</span>
+                <span className="material-symbols-outlined arrow">keyboard_arrow_up</span>
+                <p>{addLeftZero(date.getDate())}</p>
+                <span className="material-symbols-outlined arrow">keyboard_arrow_down</span>
             </div>
             <div className='month'>
-                <span class="material-symbols-outlined arrow">keyboard_arrow_up</span>
-                <p>APR</p>
-                <span class="material-symbols-outlined arrow">keyboard_arrow_down</span>
+                <span className="material-symbols-outlined arrow">keyboard_arrow_up</span>
+                <p>{convertMonth(date.getMonth())}</p>
+                <span className="material-symbols-outlined arrow">keyboard_arrow_down</span>
             </div>
             <div className='year-container'>
-                <span class="material-symbols-outlined arrow">keyboard_arrow_up</span>
-                <div className='year'>    
-                    <p>2</p>
-                    <p>0</p>
-                    <p>2</p>
-                    <p>3</p>
+                <span className="material-symbols-outlined arrow">keyboard_arrow_up</span>
+                <div className='year'>
+                    {getYearArray(date.getFullYear()).map(el => <p>{el}</p>)}
                 </div>
-                <span class="material-symbols-outlined arrow">keyboard_arrow_down</span>
+                <span className="material-symbols-outlined arrow">keyboard_arrow_down</span>
             </div>
         </div>
     )

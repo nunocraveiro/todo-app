@@ -1,33 +1,55 @@
 import './Current.css';
+import Todo from './Todo';
+import { useRef, useState, useEffect } from 'react';
+import { addLeftZero, getWeekDay } from '../helper-functions';
 
-const Current = ({todos, setTodos}) => {
+const Current = ({date, todos, setTodos, completedTodos, setCompletedTodos}) => {
+    const completedTodosRef = useRef(null);
+    const [searchActive, setSearchActive] = useState(false);
+    const [filteredTodos, setFilteredTodos] = useState([]);
+    const [filteredCompletedTodos, setFilteredCompletedTodos] = useState([]);
+
     const searchHandler = e => {
-        // setSearchActive(true);
+        setSearchActive(true);
         if (e.currentTarget.value === '') {
-            // setSearchActive(false)
-            return setTodos(JSON.parse(localStorage.getItem('todos')));
+            setSearchActive(false);
+            setFilteredTodos([]);
+            return setFilteredCompletedTodos([]);
         }
-        return setTodos(todos.filter(todo => 
+        setFilteredTodos(todos.filter(todo => 
+            todo.title.toLowerCase().includes(e.currentTarget.value.toLowerCase()) 
+            || todo.description.toLowerCase().includes(e.currentTarget.value.toLowerCase())
+        ));
+        return setFilteredCompletedTodos(completedTodos.filter(todo => 
             todo.title.toLowerCase().includes(e.currentTarget.value.toLowerCase()) 
             || todo.description.toLowerCase().includes(e.currentTarget.value.toLowerCase())
         ));
     }
 
+    useEffect(() => {
+        if (completedTodos.length > 0 && !searchActive && !completedTodos[completedTodos.length-1].added) {
+            completedTodosRef.current.lastChild.classList.add('animate-new');
+            completedTodos[completedTodos.length-1].added = true;
+        }
+    }, [completedTodos, searchActive])
+
     return (
         <div className='current'>
             <div className='current-header row'>
-                <h2 className='week-day title'>SUNDAY</h2>
-                <h2 className='num-completed'>7/10 completed</h2>
+                <h2 className='week-day title'>{getWeekDay(date.getDay()).toUpperCase()}</h2>
+                <h2 className='num-completed'>{completedTodos.length}/{completedTodos.length+todos.length} completed</h2>
             </div>
             <div className='todo-list'>
-                <p>lalala</p>
-                <p>lalala</p>
-                <p>lalala</p>
-                <p>lalala</p>
+                {searchActive ? filteredTodos.map(todo => <Todo todo={todo} setTodos={setFilteredTodos} setCompletedTodos={setFilteredCompletedTodos}/>)
+                : todos && todos.map(todo => <Todo todo={todo} setTodos={setTodos} setCompletedTodos={setCompletedTodos}/>)}
+                <div className='todo-list-complete' ref={completedTodosRef}>
+                    {searchActive ? filteredCompletedTodos.map(todo => <Todo todo={todo} setTodos={setFilteredTodos} setCompletedTodos={setFilteredCompletedTodos}/>)
+                    : completedTodos && completedTodos.map(todo => <Todo todo={todo} setTodos={setTodos} setCompletedTodos={setCompletedTodos}/>)}
+                </div>
             </div>
             <div className='current-footer row'>
                 <input className='search' type="text" placeholder="SEARCH" onChange={searchHandler}/>
-                <h2 className='date title'>16.04.23</h2>
+                <h2 className='date title'>{addLeftZero(date.getDate())}.{addLeftZero(date.getMonth()+1)}.{date.getFullYear()}</h2>
             </div>
         </div>
     )

@@ -3,7 +3,7 @@ import Todo from './Todo';
 import { useRef, useState, useEffect } from 'react';
 import { addLeftZero, getWeekDay } from '../helper-functions';
 
-const Current = ({date, todos, setTodos, completedTodos, setCompletedTodos}) => {
+const Current = ({selectedDate, todos, setTodos, completedTodos, setCompletedTodos}) => {
     const completedTodosRef = useRef(null);
     const [searchActive, setSearchActive] = useState(false);
     const [filteredTodos, setFilteredTodos] = useState([]);
@@ -36,7 +36,7 @@ const Current = ({date, todos, setTodos, completedTodos, setCompletedTodos}) => 
     return (
         <div className='current'>
             <div className='current-header row'>
-                <h2 className='week-day title'>{getWeekDay(date.getDay()).toUpperCase()}</h2>
+                <h2 className='week-day title'>{getWeekDay(selectedDate.weekDay).toUpperCase()}</h2>
                 <h2 className='num-completed'>{completedTodos.length}/{completedTodos.length+todos.length} completed</h2>
             </div>
             <div className='todo-list'>
@@ -49,7 +49,7 @@ const Current = ({date, todos, setTodos, completedTodos, setCompletedTodos}) => 
             </div>
             <div className='current-footer row'>
                 <input className='search' type="text" placeholder="SEARCH" onChange={searchHandler}/>
-                <h2 className='date title'>{addLeftZero(date.getDate())}.{addLeftZero(date.getMonth()+1)}.{date.getFullYear()}</h2>
+                <h2 className='date title'>{addLeftZero(selectedDate.day)}.{addLeftZero(selectedDate.month)}.{selectedDate.year}</h2>
             </div>
         </div>
     )

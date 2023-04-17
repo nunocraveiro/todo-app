@@ -19,7 +19,7 @@ export const getWeekDay = (num) => {
 };
 
 export const convertMonth = (num) => {
-    switch(num+1) {
+    switch(num) {
         case 1: return 'JAN';
         case 2: return 'FEB';
         case 3: return 'MAR';
@@ -42,4 +42,27 @@ export const getYearArray = (num) => {
         result.push(num.toString()[i]);
     }
     return result;
+}
+
+export const monthSwitchUp = (day, month) => {
+    if (((month === 4 || month === 6 || month === 9 || month === 11) && day === 30)
+    || (month === 2 && day === 28) || day === 31) {
+        return true;
+    }
+}
+
+export const monthSwitchDown = (day, month) => {
+    if ((month === 5 || month === 7 || month === 10 || month === 12) && day === 1) {
+        return 30;
+    }
+    if (month === 3 && day === 1) {
+        return 28;
+    }
+    if (day === 1) {
+        return 31;
+    }
+}
+
+export const formatDate = (day, month, year) => {
+    return `${addLeftZero(day)}${addLeftZero(month)}${year}`;
 }

@@ -1,7 +1,8 @@
 import './Adder.css';
 import { useRef } from 'react';
+import { formatDate } from '../helper-functions';
 
-const Adder = ({todos, setTodos}) => {
+const Adder = ({totalNumTodos, setTodos, selectedDate}) => {
     const titleRef = useRef(null);
     const descriptionRef = useRef(null);
 
@@ -9,12 +10,13 @@ const Adder = ({todos, setTodos}) => {
         e.preventDefault();
         if (titleRef.current.value === '') return;
         const newTodo = {
-          id: todos.length === 0 ? 0 : todos[todos.length-1].id+1,
+          id: totalNumTodos === 0 ? 0 : totalNumTodos,
           title: titleRef.current.value,
           description: descriptionRef.current.value,
+          date: formatDate(selectedDate.day, selectedDate.month, selectedDate.year),
+          added: false,
           completed: false
         };
-        // setTodos(prevTodos => [...prevTodos, newTodo]);
         setTodos(prevTodos => [...prevTodos, newTodo]);
         titleRef.current.value = '';
         descriptionRef.current.value = '';

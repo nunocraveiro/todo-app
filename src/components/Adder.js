@@ -14,7 +14,7 @@ const Adder = ({totalNumTodos, setTodos, selectedDate}) => {
           title: titleRef.current.value,
           description: descriptionRef.current.value,
           date: formatDate(selectedDate.day, selectedDate.month, selectedDate.year),
-          added: false,
+          animated: [false, false],
           completed: false
         };
         setTodos(prevTodos => [...prevTodos, newTodo]);
@@ -24,8 +24,8 @@ const Adder = ({totalNumTodos, setTodos, selectedDate}) => {
 
     return (
         <div className='adder'>
-            <textarea className='new-title input' placeholder="TITLE..." spellCheck='false' maxLength='50' ref={titleRef}></textarea>
-            <textarea className='new-body input' type="text" placeholder="add something more..." spellCheck='false' maxLength='175' ref={descriptionRef}></textarea>
+            <textarea className='new-title input' placeholder="TITLE..." spellCheck='false' maxLength='43' ref={titleRef}></textarea>
+            <textarea className='new-body input' type="text" placeholder="add something more..." spellCheck='false' maxLength='65' ref={descriptionRef}></textarea>
             <button className='add-btn' onClick={handleAddTodo}>+</button>
         </div>
     )

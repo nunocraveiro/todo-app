@@ -27,11 +27,15 @@ const Current = ({selectedDate, todos, setTodos, completedTodos, setCompletedTod
     }
 
     useEffect(() => {
-        if (completedTodos.length > 0 && !searchActive && !completedTodos[completedTodos.length-1].added) {
-            completedTodosRef.current.lastChild.classList.add('animate-new');
-            completedTodos[completedTodos.length-1].added = true;
+        if (todos.length > 0 && !todos[todos.length-1].animated[0]) {
+            completedTodosRef.current.previousSibling.classList.add('animate-new-todo');
+            todos[todos.length-1].animated[0] = true;
         }
-    }, [completedTodos, searchActive])
+        if (completedTodos.length > 0 && !completedTodos[completedTodos.length-1].animated[1]) {
+            completedTodosRef.current.lastChild.classList.add('animate-new-completed');
+            completedTodos[completedTodos.length-1].animated[1] = true;
+        }
+    }, [todos, completedTodos])
 
     return (
         <div className='current'>

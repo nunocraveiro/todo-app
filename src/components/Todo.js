@@ -1,23 +1,17 @@
 import './Todo.css';
 import { useRef } from 'react';
 
-const Todo = ({todo, setTodos, setCompletedTodos}) => {
+
+const Todo = ({todo, setTodos, setCompletedTodos, totalReversedTodos, setAnimate}) => {
     const todoRef = useRef(null);
 
     const checkHandler = e => {
         if (todo.completed) {
             return;
         }
-        if (e.currentTarget.parentElement.className.includes(todo.id)) {
-            todoRef.current.classList.add('collapse');
-            e.currentTarget.classList.add('animate-check');
-        };
         todo.completed = true;
-        setTimeout(() => {
-            setTodos(prevTodos => prevTodos.filter(todoEl => todoEl.id !== todo.id));
-            setCompletedTodos(prevCompletedTodos => [...prevCompletedTodos, todo]);
-            todoRef.current.firstChild.classList.remove('animate-check');
-        }, 400);
+        todoRef.current.classList.add('collapse');
+        todoRef.current.firstChild.classList.add('animate-check');
     }
 
     const deleteHandler = e => {
@@ -27,8 +21,15 @@ const Todo = ({todo, setTodos, setCompletedTodos}) => {
         return setCompletedTodos(prevCompletedTodos => prevCompletedTodos.filter(todoEl => todoEl.id !== todo.id));
     }
 
+    const afterAnimation = () => {
+        todoRef.current.firstChild.classList.remove('animate-check');
+        setTodos(prevTodos => prevTodos.filter(todoEl => todoEl.id !== todo.id));
+        setCompletedTodos(prevCompletedTodos => [...prevCompletedTodos, todo]);
+        setAnimate(prevState => ({...prevState, completed: true}));
+    }
+    
     return (
-        <div className={todo.completed ? (todo.animated[1] ? `todo id${todo.id} completed show` : `todo id${todo.id} completed`) : `todo id${todo.id}`} ref={todoRef}>
+        <div className={todo.completed ? `todo id${todo.id} completed` : `todo id${todo.id}`} style={{'--animation-order': totalReversedTodos.indexOf(todo)}} onTransitionEnd={afterAnimation} ref={todoRef}>
             <div className={todo.completed ? 'checkbox checked' : 'checkbox'} onClick={checkHandler}></div>
             <div className='todo-info'>
                 <p className='todo-title'>{todo.title?.toUpperCase()}</p>

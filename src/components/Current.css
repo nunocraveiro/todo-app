@@ -57,10 +57,21 @@
     flex-direction: column;
     height: 21.1rem;
     gap: 0.5rem;
+    position: relative;
+    /* animation: entry 1s forwards; */
 }
 
 .todo-list-complete {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+}
+
+@keyframes entry {
+    from {
+        margin-top: 3rem;
+    }
+    to {
+        margin-top: 0rem;
+    }
 }

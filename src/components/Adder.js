@@ -2,7 +2,7 @@ import './Adder.css';
 import { useRef } from 'react';
 import { formatDate } from '../helper-functions';
 
-const Adder = ({totalNumTodos, setTodos, selectedDate}) => {
+const Adder = ({totalNumTodos, setTodos, selectedDate, setAnimate}) => {
     const titleRef = useRef(null);
     const descriptionRef = useRef(null);
 
@@ -14,10 +14,10 @@ const Adder = ({totalNumTodos, setTodos, selectedDate}) => {
           title: titleRef.current.value,
           description: descriptionRef.current.value,
           date: formatDate(selectedDate.day, selectedDate.month, selectedDate.year),
-          animated: [false, false],
           completed: false
         };
         setTodos(prevTodos => [...prevTodos, newTodo]);
+        setAnimate(prevState => ({...prevState, todos: true}));
         titleRef.current.value = '';
         descriptionRef.current.value = '';
     };

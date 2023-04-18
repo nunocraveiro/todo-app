@@ -15,6 +15,14 @@
     left: 0rem;
 }
 
+.todo-entry {
+    animation-name: todo-entry;
+    animation-duration: 350ms;
+    animation-delay: calc(var(--animation-order) * 100ms);
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+}
+
 .checkbox {
     border: 1px solid rgb(255, 245, 215);
     width: 1.1rem;
@@ -57,8 +65,7 @@
 .completed {
     background: black;
     border: 1px solid rgb(185, 179, 159);
-    left: 0rem;
-    opacity: 0;
+    left: -30rem;
 }
 
 .completed p {
@@ -76,11 +83,11 @@
 }
 
 .animate-new-todo {
-    animation: animate-new-todo 0.4s ease-in forwards;
+    animation: animate-new-todo 0.4s ease-in-out forwards;
 }
 
 .animate-new-completed {
-    animation: animate-new-completed 0.3s forwards;
+    animation: animate-new-completed 0.3s ease-in-out forwards;
 }
 
 .show {
@@ -107,11 +114,19 @@
 
 @keyframes animate-new-completed {
     0% {
-        opacity: 1;
         left: -30rem;
     }
     100% {
-        opacity: 1;
         left: 0rem;
+    }
+}
+
+@keyframes todo-entry {
+    0% {
+        opacity: 0;
+        transform: scale(0.6) translateY(-8px);
+    }
+    100% {
+        opacity: 1;
     }
 }

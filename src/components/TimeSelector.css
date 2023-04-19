@@ -59,3 +59,15 @@
 .arrow {
     cursor: pointer;
 }
+
+.arrow:active {
+    transform: scale(0.85);
+}
+
+/* .asterisk {
+    line-height: 4rem;
+    font-size: 5rem;
+    position: relative;
+    top: 1rem;
+    color: rgb(255, 206, 126);
+} */

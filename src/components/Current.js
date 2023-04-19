@@ -28,15 +28,28 @@ const Current = ({selectedDate, todos, setTodos, completedTodos, setCompletedTod
     }
 
     useEffect(() => {
+        todoListRef.current.classList.add('list-show');
+        if (animate.todos && animate.completed) {
+            Array.from(todoListRef.current.children).forEach(node => {
+                if (node.className === 'todo-list') return;
+                node.classList.add('todo-entry');
+            });
+            return Array.from(completedTodosRef.current.children).forEach(node => {
+                node.classList.add('todo-entry');
+            })
+        }
         if (todos.length > 0 && animate.todos) {
             completedTodosRef.current.previousSibling.classList.add('animate-new-todo');
-            setAnimate(prevState => ({...prevState, todos: false}));
+            return setAnimate(prevState => ({...prevState, todos: false}));
         }
-        if (completedTodos.length > 0 && animate.completed) {
-            completedTodosRef.current.lastChild.classList.add('animate-new-completed');
-            setAnimate(prevState => ({...prevState, completed: false}));
+        if (completedTodos.length > 0 && animate.completed && completedTodosRef.current.lastChild.className.includes('animate')) {
+            return completedTodosRef.current.lastChild.classList.add('animate-new-completed');
         }
     }, [animate])
+
+    window.onload = () => {
+        todoListRef.current.classList.add('list-show');
+    }
     
     return (
         <div className='current'>
@@ -45,11 +58,11 @@ const Current = ({selectedDate, todos, setTodos, completedTodos, setCompletedTod
                 <h2 className='num-completed'>{completedTodos.length}/{completedTodos.length+todos.length} completed</h2>
             </div>
             <div className='todo-list' ref={todoListRef}>
-                {searchActive ? filteredTodos.map(todo => <Todo todo={todo} setTodos={setFilteredTodos} setCompletedTodos={setFilteredCompletedTodos} totalReversedTodos={todos.concat(completedTodos).reverse()} setAnimate={setAnimate}/>)
-                : todos && todos.map(todo => <Todo todo={todo} setTodos={setTodos} setCompletedTodos={setCompletedTodos} totalReversedTodos={todos.concat(completedTodos).reverse()} setAnimate={setAnimate}/>)}
+                {searchActive ? filteredTodos.map(todo => <Todo todo={todo} setTodos={setFilteredTodos} setCompletedTodos={setFilteredCompletedTodos} totalReversedTodos={todos.concat(completedTodos).reverse()} animate={animate} setAnimate={setAnimate}/>)
+                : todos && todos.map(todo => <Todo todo={todo} setTodos={setTodos} setCompletedTodos={setCompletedTodos} totalReversedTodos={todos.concat(completedTodos).reverse()} animate={animate} setAnimate={setAnimate}/>)}
                 <div className='todo-list-complete' ref={completedTodosRef}>
-                    {searchActive ? filteredCompletedTodos.map(todo => <Todo todo={todo} setTodos={setFilteredTodos} setCompletedTodos={setFilteredCompletedTodos} totalReversedTodos={todos.concat(completedTodos).reverse()} setAnimate={setAnimate}/>)
-                    : completedTodos && completedTodos.map(todo => <Todo todo={todo} setTodos={setTodos} setCompletedTodos={setCompletedTodos} totalReversedTodos={todos.concat(completedTodos).reverse()} setAnimate={setAnimate}/>)}
+                    {searchActive ? filteredCompletedTodos.map(todo => <Todo todo={todo} setTodos={setFilteredTodos} setCompletedTodos={setFilteredCompletedTodos} totalReversedTodos={todos.concat(completedTodos).reverse()} animate={animate} setAnimate={setAnimate}/>)
+                    : completedTodos && completedTodos.map(todo => <Todo todo={todo} setTodos={setTodos} setCompletedTodos={setCompletedTodos} totalReversedTodos={todos.concat(completedTodos).reverse()} animate={animate} setAnimate={setAnimate}/>)}
                 </div>
             </div>
             <div className='current-footer row'>

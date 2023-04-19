@@ -1,7 +1,7 @@
 import './TimeSelector.css';
 import { addLeftZero, convertMonth, getYearArray, monthSwitchUp, monthSwitchDown } from '../helper-functions';
 
-const TimeSelector = ({selectedDate, setSelectedDate}) => {
+const TimeSelector = ({selectedDate, setSelectedDate, setAnimate}) => {
     const daySelectorHandler = e => {
         if (e.currentTarget.innerHTML.includes('up')) {
             setSelectedDate(prevDate => ({
@@ -21,6 +21,7 @@ const TimeSelector = ({selectedDate, setSelectedDate}) => {
                 year: prevDate.month === 1 && prevDate.day === 1 ? prevDate.year-1 : prevDate.year
             }));
         }
+        setAnimate({todos: true, completed: true});
     }
 
     const monthSelectorHandler = e => {
@@ -38,6 +39,7 @@ const TimeSelector = ({selectedDate, setSelectedDate}) => {
                 year: prevDate.month === 1 ? prevDate.year-1 : prevDate.year
             }));
         }
+        setAnimate({todos: true, completed: true});
     }
 
     const yearSelectorHandler = e => {
@@ -53,10 +55,12 @@ const TimeSelector = ({selectedDate, setSelectedDate}) => {
                 year: prevDate.year-1
             }));
         }
+        setAnimate({todos: true, completed: true});
     }
 
     return (
         <div className='time-selector'>
+            {/* <p className='asterisk'>*</p> */}
             <div className='day'>
                 <span className="material-symbols-outlined arrow" onClick={daySelectorHandler}>keyboard_arrow_up</span>
                 <p>{addLeftZero(selectedDate.day)}</p>

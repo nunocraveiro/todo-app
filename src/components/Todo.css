@@ -6,7 +6,7 @@
     border-radius: 6px;
     padding: 0.7rem;
     padding-left: 1rem;
-    padding-right: 1rem;
+    padding-right: 1.5rem;
     align-items: center;
     width: 100%;
     height: 4.4rem;
@@ -15,11 +15,30 @@
     left: 0rem;
 }
 
+.completed-animate {
+    color: rgb(255, 245, 215);
+    display: flex;
+    flex-direction: row;
+    background: black;
+    border: 1px solid rgb(185, 179, 159);
+    border-radius: 6px;
+    padding: 0.7rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    align-items: center;
+    width: 100%;
+    height: 4.4rem;
+    white-space: nowrap;
+    position: relative;
+    left: -30rem;
+}
+
 .todo-entry {
+    opacity: 0;
     animation-name: todo-entry;
     animation-duration: 350ms;
     animation-delay: calc(var(--animation-order) * 100ms);
-    animation-fill-mode: forwards;
+    animation-fill-mode: both;
     animation-timing-function: ease-in-out;
 }
 
@@ -65,7 +84,6 @@
 .completed {
     background: black;
     border: 1px solid rgb(185, 179, 159);
-    left: -30rem;
 }
 
 .completed p {
@@ -90,15 +108,20 @@
     animation: animate-new-completed 0.3s ease-in-out forwards;
 }
 
-.show {
-    opacity: 1;
-}
-
 .delete {
     margin-left: auto;
     cursor: pointer;
     user-select: none;
     font-size: 1.3rem;
+}
+
+.delete-animation {
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    margin-top: -0.5rem;
+    transition: height 0.2s 0.1s, padding 0.2s 0.1s, margin-top 0.2s 0.1s;
+    animation: delete-animation 0.4s forwards;
 }
 
 @keyframes animate-new-todo {
@@ -128,5 +151,15 @@
     }
     100% {
         opacity: 1;
+    }
+}
+
+@keyframes delete-animation {
+    0% {
+        opacity: 1;
+        transform: scale(0.6) translateY(-8px);
+    }
+    100% {
+        opacity: 0;
     }
 }

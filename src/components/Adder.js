@@ -6,8 +6,7 @@ const Adder = ({totalNumTodos, setTodos, selectedDate, setAnimate}) => {
     const titleRef = useRef(null);
     const descriptionRef = useRef(null);
 
-    const handleAddTodo = e => {
-        e.preventDefault();
+    const handleAddTodo = () => {
         if (titleRef.current.value === '') return;
         const newTodo = {
           id: totalNumTodos === 0 ? 0 : totalNumTodos,
@@ -26,7 +25,7 @@ const Adder = ({totalNumTodos, setTodos, selectedDate, setAnimate}) => {
         <div className='adder'>
             <textarea className='new-title input' placeholder="TITLE..." spellCheck='false' maxLength='43' ref={titleRef}></textarea>
             <textarea className='new-body input' type="text" placeholder="add something more..." spellCheck='false' maxLength='65' ref={descriptionRef}></textarea>
-            <button className='add-btn' onClick={handleAddTodo}>+</button>
+            <button className='add-btn' onClick={handleAddTodo} onTransitionEnd={e => e.currentTarget.classList.remove('click-animate')}>ADD +</button>
         </div>
     )
 }

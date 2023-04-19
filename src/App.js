@@ -5,22 +5,14 @@ import TimeSelector from './components/TimeSelector';
 import Adder from './components/Adder';
 import { formatDate } from './helper-functions';
 
-window.onbeforeunload = () => localStorage.clear();
+// window.onbeforeunload = () => localStorage.clear();
 
 const App = () => {
   const date = new Date();
   const [selectedDate, setSelectedDate] = useState({weekDay: date.getDay(), day: date.getDate(), month: date.getMonth()+1, year: date.getFullYear()});
-  const [todos, setTodos] = useState(localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : [
-    {id: 0, title: 'go to ada and get bounties', description: '', date: '18042023', completed: false}, 
-    {id: 1, title: 'do flawless lake of shadows', description: '', date: '18042023', completed: false}, 
-    {id: 2, title: 'finish thunderlord catalyst', description: '', date: '18042023', completed: false},
-    {id: 3, title: 'go to ada and get bounties', description: '', date: '19042023', completed: false}, 
-    {id: 4, title: 'do flawless lake of shadows', description: '', date: '19042023', completed: false}, 
-    {id: 5, title: 'finish thunderlord catalyst', description: '', date: '19042023', completed: false}
-  ]);
-  // const [todos, setTodos] = useState(localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : []);
+  const [todos, setTodos] = useState(localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : []);
   const [completedTodos, setCompletedTodos] = useState(localStorage.getItem('completedTodos') ? JSON.parse(localStorage.getItem('completedTodos')) : []);
-  const [animate, setAnimate] = useState({todos: false, completed: false});
+  const [animate, setAnimate] = useState({todos: true, completed: true});
   
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
@@ -38,7 +30,7 @@ const App = () => {
         animate={animate}
         setAnimate={setAnimate}
       />
-      <TimeSelector selectedDate={selectedDate} setSelectedDate={setSelectedDate}/>
+      <TimeSelector selectedDate={selectedDate} setSelectedDate={setSelectedDate} setAnimate={setAnimate}/>
       <Adder totalNumTodos={todos.length+completedTodos.length} setTodos={setTodos} selectedDate={selectedDate} setAnimate={setAnimate}/>
     </div>
   );

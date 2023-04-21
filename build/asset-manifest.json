@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.60a67033.css",
+    "main.js": "/static/js/main.0a7524cc.js",
+    "static/js/787.2843ca88.chunk.js": "/static/js/787.2843ca88.chunk.js",
+    "static/media/PPNeueMachina-PlainUltrabold.otf": "/static/media/PPNeueMachina-PlainUltrabold.d0c9688b561e5f9d666b.otf",
+    "static/media/PPNeueMachina-PlainRegular.otf": "/static/media/PPNeueMachina-PlainRegular.c1fe9e8fedaaf2eed971.otf",
+    "static/media/PPNeueMachina-PlainLight.otf": "/static/media/PPNeueMachina-PlainLight.963e24ed86839ab057e0.otf",
+    "static/media/PPCharlevoix-Extralight.otf": "/static/media/PPCharlevoix-Extralight.2ec40256528a8ba13fec.otf",
+    "static/media/PPCharlevoix-Bold.otf": "/static/media/PPCharlevoix-Bold.8550a2c628dc9c0f47f0.otf",
+    "index.html": "/index.html",
+    "main.60a67033.css.map": "/static/css/main.60a67033.css.map",
+    "main.0a7524cc.js.map": "/static/js/main.0a7524cc.js.map",
+    "787.2843ca88.chunk.js.map": "/static/js/787.2843ca88.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.60a67033.css",
+    "static/js/main.0a7524cc.js"
+  ]
+}
